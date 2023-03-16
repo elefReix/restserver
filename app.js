@@ -1,25 +1,27 @@
-const http = require('http')
+const express = require('express')
+const app = express()
 
-const server = http.createServer((req,res)=>{
-    console.log(req)
+//configuracion middleware
+app.use( express.static('public') )
 
-    res.setHeader('Content-Disposition','attachment; filename=lista.csv')
-    res.writeHead(201,{'Content-Type':'application/csv'}) 
-
-    const persona = {
-        id:1,
-        nombre:'Katiana', 
-        apellidoPaterno:'Vazquez',
-        apellidoMaterno:'Corrales'
-    }
-
-
-    res.write('id, Nombre \n')
-    res.write('1, Jesus \n')
-    res.write('2, Katiana \n')
-    res.write('3, Katianita \n')
-    res.end()
-
+app.get('/ping', (req,res)=>{
+    res.send('hola elef')
 })
 
-server.listen(3017)
+app.get('/generic', (req,res)=>{
+    res.sendFile(__dirname+'/public/generic.html')
+})
+
+app.get('/elements', (req,res)=>{
+    res.sendFile(__dirname+'/public/elements.html')
+})
+
+app.get('/index', (req,res)=>{
+    res.sendFile(__dirname+'/public/index.html')
+})
+
+app.get('*', (req,res)=>{
+    res.sendFile(__dirname+'/public/404.html')
+})
+
+app.listen( 3017, ()=> {console.log('Server Corriendo en el puerto 3017')} )
