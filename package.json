@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node app.js", 
+=======
+    "start": "nodemon app.js",
+>>>>>>> desarrollo
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +21,6 @@
     "hbs": "^4.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   }
 }
