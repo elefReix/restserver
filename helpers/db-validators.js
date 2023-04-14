@@ -15,15 +15,23 @@ const email_validator = async (correo ='') =>{
     }
 }
 
-const existe_usuario_por_validator = async (id) =>{
-    const existe_usuario = await Usuario.findById(id)
+const usuario_activo_validator = async (correo ='') =>{
+    const usuario_activo = await Usuario.findOne({correo})
+    if (!usuario_activo.estado) {
+        throw new Error(`El usuario ${correo} esta desactivado o no existe `)
+    }
+}
+
+const existe_usuario_por_validator = async (correo) =>{
+    const existe_usuario = await Usuario.findOne({correo})
     if (!existe_usuario) {
-        throw new Error(`No existen usuario con el id ${_id} `)
+        throw new Error(`No existen usuario con el correo : ${correo} `)
     }
 }
 
 module.exports = {
     rol_validator,
     email_validator,
+    usuario_activo_validator,
     existe_usuario_por_validator
 }
